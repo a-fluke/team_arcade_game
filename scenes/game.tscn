@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvrchm2lit7c"]
+
+[ext_resource type="PackedScene" uid="uid://bc4kxnxd2ecit" path="res://scenes/map_a.tscn" id="1_k2l84"]
+[ext_resource type="PackedScene" uid="uid://bijqsfvgl8y3t" path="res://scenes/player.tscn" id="2_lpxyh"]
+[ext_resource type="PackedScene" uid="uid://bbqefwcvyb7q6" path="res://scenes/barrel.tscn" id="2_rd6ru"]
+[ext_resource type="PackedScene" uid="uid://dw8v3d8hjehab" path="res://scenes/refuel_station.tscn" id="3_q45q8"]
+[ext_resource type="PackedScene" uid="uid://6bosf2nye1gb" path="res://scenes/test_item.tscn" id="5_3gm60"]
+
+[node name="Game" type="Node2D"]
+
+[node name="mapA" parent="." instance=ExtResource("1_k2l84")]
+
+[node name="barrel2" parent="." instance=ExtResource("2_rd6ru")]
+z_index = 1
+position = Vector2(206, 281)
+
+[node name="barrel" parent="." instance=ExtResource("2_rd6ru")]
+position = Vector2(433, 281)
+
+[node name="refuel_station" parent="." instance=ExtResource("3_q45q8")]
+position = Vector2(320, 244)
+
+[node name="player" parent="." instance=ExtResource("2_lpxyh")]
+position = Vector2(58, 331)
+
+[node name="test_item" parent="." instance=ExtResource("5_3gm60")]
+position = Vector2(565, 272)
