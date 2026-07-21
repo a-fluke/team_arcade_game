@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://bc4kxnxd2ecit"]
+
+[ext_resource type="PackedScene" uid="uid://rrfo5s54wlja" path="res://scenes/platform.tscn" id="1_5wfr4"]
+[ext_resource type="Texture2D" uid="uid://bq5egyk5lyl66" path="res://assets/space_bkgd.png" id="1_ovoca"]
+[ext_resource type="Texture2D" uid="uid://c1c2lrwl53orh" path="res://assets/space_frgd.png" id="2_3x78n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yobwr"]
+size = Vector2(660, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c4kjw"]
+size = Vector2(20, 380)
+
+[node name="mapA" type="Node2D"]
+
+[node name="bkgd" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(320, 180)
+texture = ExtResource("1_ovoca")
+
+[node name="frgd" type="Sprite2D" parent="."]
+z_index = 2
+texture_filter = 1
+position = Vector2(320, 180)
+texture = ExtResource("2_3x78n")
+
+[node name="boundaries" type="StaticBody2D" parent="."]
+
+[node name="roof" type="CollisionShape2D" parent="boundaries"]
+position = Vector2(320, -10)
+shape = SubResource("RectangleShape2D_yobwr")
+
+[node name="floor" type="CollisionShape2D" parent="boundaries"]
+position = Vector2(320, 366)
+shape = SubResource("RectangleShape2D_yobwr")
+
+[node name="rightwall" type="CollisionShape2D" parent="boundaries"]
+position = Vector2(650, 180)
+shape = SubResource("RectangleShape2D_c4kjw")
+
+[node name="leftwall" type="CollisionShape2D" parent="boundaries"]
+position = Vector2(-10, 180)
+shape = SubResource("RectangleShape2D_c4kjw")
+
+[node name="platforms" type="Node2D" parent="."]
+
+[node name="platform4" parent="platforms" instance=ExtResource("1_5wfr4")]
+position = Vector2(320, 263)
+scale = Vector2(1.05, 0.6)
+
+[node name="platform" parent="platforms" instance=ExtResource("1_5wfr4")]
+position = Vector2(116, 204)
+scale = Vector2(0.6, 0.6)
+
+[node name="platform3" parent="platforms" instance=ExtResource("1_5wfr4")]
+position = Vector2(8, 284)
+scale = Vector2(1.05, 0.6)
+
+[node name="platform2" parent="platforms" instance=ExtResource("1_5wfr4")]
+position = Vector2(523, 204)
+scale = Vector2(0.6, 0.6)
+
+[node name="platform5" parent="platforms" instance=ExtResource("1_5wfr4")]
+position = Vector2(630, 284)
+scale = Vector2(1.05, 0.6)
+
+[node name="platform6" parent="platforms" instance=ExtResource("1_5wfr4")]
+position = Vector2(19, 147)
+scale = Vector2(1.05, 1.2)
+
+[node name="platform7" parent="platforms" instance=ExtResource("1_5wfr4")]
+position = Vector2(621, 148)
+scale = Vector2(1.05, 1.2)
+
+[node name="platform8" parent="platforms" instance=ExtResource("1_5wfr4")]
+position = Vector2(611, 73)
+scale = Vector2(1.05, 0.6)
+
+[node name="platform9" parent="platforms" instance=ExtResource("1_5wfr4")]
+position = Vector2(29, 72)
+scale = Vector2(1.05, 0.6)
