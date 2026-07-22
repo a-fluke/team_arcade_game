@@ -1,5 +1,5 @@
 extends Carryable
-class_name Barrel
+class_name Battery
 
 # ----- VARIABLES ----- #
 #var GRAVITY : float

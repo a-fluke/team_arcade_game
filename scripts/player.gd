@@ -57,10 +57,6 @@ func _physics_process(delta: float) -> void:
 	flip_player()
 	move_and_slide()
 	
-	
-	#if held_item:
-		#held_item.held_movement()
-	
 	update_jump_state()
 
 func _process(delta: float) -> void:
