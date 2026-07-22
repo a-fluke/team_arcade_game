@@ -6,7 +6,7 @@ func _ready() -> void:
 	$fuelTimer.wait_time = 1.0
 
 func accepts(item):
-	return item is Barrel
+	return item is Battery
 
 func empty():
 	state = State.EMPTY
