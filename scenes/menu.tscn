@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cthbkj0vfk4mn"]
+[gd_scene load_steps=7 format=3 uid="uid://cthbkj0vfk4mn"]
 
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_ou7hj"]
 [ext_resource type="Texture2D" uid="uid://da5mn0iisryi1" path="res://assets/bkgd_empty.png" id="1_selye"]
 [ext_resource type="FontFile" uid="uid://d0u8jmefifmwx" path="res://fonts/edit-undo/editundo.ttf" id="2_wfubu"]
 
@@ -13,6 +14,7 @@ bg_color = Color(0.855437, 0.569749, 0.347854, 1)
 bg_color = Color(0.487585, 0.292319, 0.137444, 1)
 
 [node name="menu" type="Node2D"]
+script = ExtResource("1_ou7hj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(320, 180)
@@ -35,3 +37,5 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_a8g85")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_di44t")
 theme_override_styles/normal = SubResource("StyleBoxFlat_v6a8m")
 text = "Start"
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

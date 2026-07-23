@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://di4m56ll8n04b"]
+
+[ext_resource type="PackedScene" uid="uid://bc4kxnxd2ecit" path="res://scenes/map_a.tscn" id="1_ept53"]
+[ext_resource type="PackedScene" uid="uid://bijqsfvgl8y3t" path="res://scenes/player.tscn" id="2_3x1p4"]
+[ext_resource type="PackedScene" uid="uid://dddhq3q53x0hn" path="res://scenes/battery.tscn" id="3_1v6r3"]
+[ext_resource type="PackedScene" uid="uid://dw8v3d8hjehab" path="res://scenes/refuel_station.tscn" id="4_x40tn"]
+[ext_resource type="PackedScene" uid="uid://6bosf2nye1gb" path="res://scenes/test_item.tscn" id="5_il3dv"]
+
+[node name="level1" type="Node2D"]
+
+[node name="mapA" parent="." instance=ExtResource("1_ept53")]
+
+[node name="player" parent="." instance=ExtResource("2_3x1p4")]
+position = Vector2(34, 48)
+
+[node name="battery" parent="." instance=ExtResource("3_1v6r3")]
+position = Vector2(525, 184)
+
+[node name="refuel_station" parent="." instance=ExtResource("4_x40tn")]
+position = Vector2(320, 261)
+
+[node name="test_item" parent="." instance=ExtResource("5_il3dv")]
+position = Vector2(111, 169)

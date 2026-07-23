@@ -66,4 +66,3 @@ func ground_movement(delta):
 func held_movement():
 	var hold_point = carrier.get_node("hold_point")
 	global_position = hold_point.global_position
-	print(self , " - y: " , $Sprite2D.global_position.y)
