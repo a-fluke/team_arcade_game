@@ -24,3 +24,5 @@ position = Vector2(202, 252)
 
 [node name="refuel_station" parent="." instance=ExtResource("3_q45q8")]
 position = Vector2(320, 244)
+
+[node name="Container" type="Node2D" parent="."]
