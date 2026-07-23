@@ -6,12 +6,24 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8g85"]
 bg_color = Color(0.854902, 0.568627, 0.34902, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_di44t"]
 bg_color = Color(0.855437, 0.569749, 0.347854, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6a8m"]
 bg_color = Color(0.487585, 0.292319, 0.137444, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="menu" type="Node2D"]
 script = ExtResource("1_ou7hj")
