@@ -1,7 +1,9 @@
 extends Node2D
+class_name Player_Cursor
+
+signal interact
 
 var player_id : int
-#var device_id : int
 var speed : int = 500
 var player_input : Player_Input
 
@@ -12,8 +14,11 @@ func _ready() -> void:
 	global_position = get_viewport_rect().size/2 + Vector2(0,-50)
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	move_cursor(delta)
+	if player_input.a_just_pressed():
+		print("pressed")
+		interact.emit()
 	queue_redraw()
 
 func move_cursor(delta):

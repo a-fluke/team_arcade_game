@@ -12,28 +12,31 @@ var player_slots : Array[PlayerSlot] = []
 var player_device_map : Dictionary = {}
 
 
-func _process(delta: float) -> void:
-	for player in player_slots:
-		update_left_stick(player)
+func _physics_process(delta: float) -> void:
+	for slot in player_slots:
+		update_input(slot)
+		update_left_stick(slot)
 
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadButton and event.pressed:
 		var device = event.device
-		
 		if !device_is_joined(device):
 			join(device)
-		else:
-			match event.button_index:
-				JOY_BUTTON_A:
-					pass
-				JOY_BUTTON_B:
-					pass
-				JOY_BUTTON_X:
-					pass
-				JOY_BUTTON_Y:
-					pass
 
+func update_input(player : PlayerSlot):
+	update_buttons(player)
+	update_left_stick(player)
+
+func update_buttons(slot):
+	var input = slot.player_input
+	
+	input.a_previous = input.a_current
+	input.a_current = Input.is_joy_button_pressed(
+		slot.device_id,
+		JOY_BUTTON_A
+	)
+	
 
 func update_left_stick(player):
 	player.player_input.left_stick = Vector2(
