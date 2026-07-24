@@ -5,6 +5,9 @@ const SELECTION_MENU = preload("res://scenes/selection_menu.tscn")
 
 func _ready() -> void:
 	load_main_menu()
+	await get_tree().process_frame
+	print(Input.get_connected_joypads())
+	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	
 
 func unload():
@@ -43,3 +46,7 @@ func _on_start_pressed():
 
 func _on_start_game_pressed():
 	load_level($Menu_Container/selection_menu.level_path)
+
+
+func _on_joy_connection_changed(device: int, connected: bool):
+	print(device, connected)

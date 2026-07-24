@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvrchm2lit7c"]
+[gd_scene load_steps=3 format=3 uid="uid://cvrchm2lit7c"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_hrjy4"]
+[ext_resource type="Script" path="res://scripts/input_manager.gd" id="2_6772f"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_hrjy4")
@@ -8,3 +9,6 @@ script = ExtResource("1_hrjy4")
 [node name="Menu_Container" type="Node2D" parent="."]
 
 [node name="Level_Container" type="Node2D" parent="."]
+
+[node name="Input_Manager" type="Node2D" parent="."]
+script = ExtResource("2_6772f")

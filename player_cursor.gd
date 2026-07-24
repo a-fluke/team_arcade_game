@@ -1,0 +1,30 @@
+extends Node2D
+
+var player_id : int
+#var device_id : int
+var speed : int = 500
+var player_input : Player_Input
+
+
+func _ready() -> void:
+	$player_num.text = "P%d" % (player_id + 1)
+	$player_num.add_theme_color_override("font_color",World.PLAYER_COLORS[player_id])
+	global_position = get_viewport_rect().size/2 + Vector2(0,-50)
+
+
+func _process(delta: float) -> void:
+	move_cursor(delta)
+	queue_redraw()
+
+func move_cursor(delta):
+	var movement = player_input.left_stick
+	
+	# Deadzone
+	if movement.length() < 0.2:
+		movement = Vector2.ZERO
+		
+	global_position += movement * speed * delta
+
+
+func _draw() -> void:
+	draw_circle(Vector2.ZERO,3,World.PLAYER_COLORS[player_id],false,2)
