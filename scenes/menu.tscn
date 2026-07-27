@@ -34,10 +34,10 @@ position = Vector2(320, 180)
 texture = ExtResource("1_selye")
 
 [node name="Start" type="Button" parent="."]
-offset_left = 281.0
-offset_top = 168.0
-offset_right = 361.0
-offset_bottom = 198.0
+offset_left = 533.0
+offset_top = 302.0
+offset_right = 613.0
+offset_bottom = 332.0
 theme_override_colors/font_disabled_color = Color(0.756863, 0.917647, 0.701961, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.578383, 0.789928, 0.503875, 1)
 theme_override_colors/font_hover_color = Color(0.576471, 0.788235, 0.501961, 1)
@@ -52,7 +52,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_v6a8m")
 text = "Start"
 
 [node name="button" parent="." instance=ExtResource("4_l3cny")]
-position = Vector2(554, 307)
+position = Vector2(320, 180)
 
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
 [connection signal="button_pressed" from="button" to="." method="_on_button_button_pressed"]

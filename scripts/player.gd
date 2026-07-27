@@ -36,6 +36,7 @@ var facing : Vector2
 # --- inputs --- #
 var horizontal_dir : int = 0
 var jump_buffer : float = 0
+var player_input : Player_Input
 
 func _ready() -> void:
 	GRAVITY = World.GRAVITY
@@ -68,10 +69,13 @@ func _process(delta: float) -> void:
 # ----- INPUT ----- #
 func handle_input():
 	if movement_enabled:
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("jump") or player_input.a_just_pressed():
 			jump_buffer =JUMP_BUFFER_TIME
-	
-		horizontal_dir = Input.get_axis("left","right")
+		
+		var movement = player_input.left_stick.x
+		horizontal_dir = sign(movement) if abs(movement) > 0.2 else 0.0
+		
+		#horizontal_dir = Input.get_axis("left","right")
 
 # ------ JUMP FUNCTIONS ----- #
 func check_jump():

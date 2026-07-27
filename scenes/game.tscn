@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_hrjy4"]
 [ext_resource type="Script" path="res://scripts/input_manager.gd" id="2_6772f"]
-[ext_resource type="PackedScene" uid="uid://6bosf2nye1gb" path="res://scenes/test_item.tscn" id="3_sg6g4"]
+[ext_resource type="PackedScene" uid="uid://dddhq3q53x0hn" path="res://scenes/battery.tscn" id="3_6ah83"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jn3da"]
 size = Vector2(660, 20)
@@ -19,6 +19,8 @@ script = ExtResource("1_hrjy4")
 
 [node name="Input_Manager" type="Node2D" parent="."]
 script = ExtResource("2_6772f")
+
+[node name="Player_Container" type="Node2D" parent="."]
 
 [node name="boundaries" type="StaticBody2D" parent="."]
 collision_mask = 0
@@ -39,5 +41,5 @@ shape = SubResource("RectangleShape2D_adhb5")
 position = Vector2(-10, 180)
 shape = SubResource("RectangleShape2D_adhb5")
 
-[node name="test_item" parent="." instance=ExtResource("3_sg6g4")]
-position = Vector2(177, 84)
+[node name="battery" parent="." instance=ExtResource("3_6ah83")]
+position = Vector2(320, 36)

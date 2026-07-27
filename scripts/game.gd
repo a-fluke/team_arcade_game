@@ -2,11 +2,11 @@ extends Node2D
 
 const MAIN_MENU = preload("res://scenes/menu.tscn")
 const SELECTION_MENU = preload("res://scenes/selection_menu.tscn")
+const PLAYER = preload("res://scenes/player.tscn")
 
 func _ready() -> void:
 	load_main_menu()
 	await get_tree().process_frame
-	print(Input.get_connected_joypads())
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	
 
@@ -31,6 +31,7 @@ func load_level(path: String):
 	# Add new level
 	var level = load(path).instantiate()
 	$Level_Container.add_child(level)
+	cursors_to_players()
 
 
 func load_selection_menu():
@@ -39,6 +40,22 @@ func load_selection_menu():
 	menu.start_game_pressed.connect(_on_start_game_pressed)
 	$Menu_Container.add_child(menu)
 
+func cursors_to_players():
+	var inputs : Array[Player_Input]
+	
+	for player in $Player_Container.get_children():
+		#var new_input = Player_Input.new()
+		#new_input
+		inputs.append(player.player_input)
+		player.queue_free()
+	
+	for i in inputs:
+		var player = PLAYER.instantiate()
+		
+		player.player_input = i
+		print(player.player_input)
+		$Player_Container.add_child(player)
+	
 
 func _on_start_pressed():
 	load_selection_menu()

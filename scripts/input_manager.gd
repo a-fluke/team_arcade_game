@@ -17,7 +17,6 @@ func _physics_process(delta: float) -> void:
 		update_input(slot)
 		update_left_stick(slot)
 
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadButton and event.pressed:
 		var device = event.device
@@ -36,7 +35,6 @@ func update_buttons(slot):
 		slot.device_id,
 		JOY_BUTTON_A
 	)
-	
 
 func update_left_stick(player):
 	player.player_input.left_stick = Vector2(
@@ -50,7 +48,6 @@ func device_is_joined(device):
 			return true
 	return false
 
-
 func join(device):
 	var slot = PlayerSlot.new()
 	var player_id = player_slots.size()
@@ -59,7 +56,7 @@ func join(device):
 	slot.device_id = device
 	slot.player_input = Player_Input.new()
 	player_slots.append(slot)
-	
+	print(slot.player_input)
 	# create player cursor
 	var player_cursor = PLAYER_CURSOR.instantiate()
 	player_cursor.player_id = player_id
@@ -68,8 +65,7 @@ func join(device):
 	# map device to player
 	player_device_map[device] = player_id
 	
-	add_child(player_cursor)
-
+	get_tree().current_scene.get_node("Player_Container").add_child(player_cursor)
 
 func get_player_id(device):
 	return player_device_map[device]

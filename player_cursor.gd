@@ -18,7 +18,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	move_cursor(delta)
 	if player_input.a_just_pressed():
-		print("pressed")
 		interact.emit()
 	queue_redraw()
 
