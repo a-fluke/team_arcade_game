@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc4kxnxd2ecit"]
+
+[ext_resource type="Texture2D" uid="uid://bq5egyk5lyl66" path="res://assets/space_bkgd.png" id="1_ovoca"]
+[ext_resource type="Texture2D" uid="uid://c1c2lrwl53orh" path="res://assets/space_frgd.png" id="2_3x78n"]
+
+[node name="bkgd_a" type="Node2D"]
+
+[node name="bkgd" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(320, 180)
+texture = ExtResource("1_ovoca")
+
+[node name="frgd" type="Sprite2D" parent="."]
+z_index = 2
+texture_filter = 1
+position = Vector2(320, 180)
+texture = ExtResource("2_3x78n")

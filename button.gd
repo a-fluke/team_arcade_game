@@ -13,8 +13,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		body.interact.connect(_on_player_interact)
 
 
-
-
 func _on_area_2d_area_exited(area: Node2D) -> void:
 	var body = area.get_parent()
 	if body in nearby_players:

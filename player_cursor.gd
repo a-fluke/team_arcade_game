@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 class_name Player_Cursor
 
 signal interact
@@ -6,6 +6,7 @@ signal interact
 var player_id : int
 var speed : int = 500
 var player_input : Player_Input
+var radius : int = 3
 
 
 func _ready() -> void:
@@ -28,8 +29,9 @@ func move_cursor(delta):
 	if movement.length() < 0.2:
 		movement = Vector2.ZERO
 		
-	global_position += movement * speed * delta
+	velocity = movement * speed
+	move_and_slide()
 
 
 func _draw() -> void:
-	draw_circle(Vector2.ZERO,3,World.PLAYER_COLORS[player_id],false,2)
+	draw_circle(Vector2.ZERO,radius,World.PLAYER_COLORS[player_id],false,2)

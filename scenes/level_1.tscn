@@ -1,23 +1,100 @@
-[gd_scene load_steps=6 format=3 uid="uid://di4m56ll8n04b"]
+[gd_scene load_steps=8 format=4 uid="uid://di4m56ll8n04b"]
 
-[ext_resource type="PackedScene" uid="uid://bc4kxnxd2ecit" path="res://scenes/map_a.tscn" id="1_ept53"]
+[ext_resource type="PackedScene" uid="uid://bc4kxnxd2ecit" path="res://scenes/bkgd_a.tscn" id="1_ept53"]
 [ext_resource type="PackedScene" uid="uid://bijqsfvgl8y3t" path="res://scenes/player.tscn" id="2_3x1p4"]
 [ext_resource type="PackedScene" uid="uid://dddhq3q53x0hn" path="res://scenes/battery.tscn" id="3_1v6r3"]
 [ext_resource type="PackedScene" uid="uid://dw8v3d8hjehab" path="res://scenes/refuel_station.tscn" id="4_x40tn"]
-[ext_resource type="PackedScene" uid="uid://6bosf2nye1gb" path="res://scenes/test_item.tscn" id="5_il3dv"]
+[ext_resource type="Texture2D" uid="uid://cfvoowqx38rrd" path="res://assets/platform_tiles.png" id="5_uo1ey"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l6t31"]
+texture = ExtResource("5_uo1ey")
+margins = Vector2i(8, 8)
+separation = Vector2i(1, 2)
+texture_region_size = Vector2i(16, 14)
+17:0/size_in_atlas = Vector2i(16, 14)
+17:0/0 = 0
+17:0/0/terrain_set = 0
+17:0/0/terrain = 0
+17:0/0/terrains_peering_bit/right_side = 0
+17:0/0/terrains_peering_bit/bottom_side = 0
+17:0/0/terrains_peering_bit/left_side = 0
+34:0/size_in_atlas = Vector2i(16, 14)
+34:0/0 = 0
+34:0/0/terrain_set = 0
+34:0/0/terrain = 0
+34:0/0/terrains_peering_bit/right_side = 0
+34:0/0/terrains_peering_bit/bottom_side = 0
+34:0/0/terrains_peering_bit/left_side = 0
+34:0/0/terrains_peering_bit/top_side = 0
+51:0/size_in_atlas = Vector2i(16, 14)
+51:0/0 = 0
+51:0/0/terrain_set = 0
+51:0/0/terrain = 0
+51:0/0/terrains_peering_bit/right_side = 0
+51:0/0/terrains_peering_bit/bottom_side = 0
+51:0/0/terrains_peering_bit/left_side = 0
+51:0/0/terrains_peering_bit/top_side = 0
+68:0/size_in_atlas = Vector2i(16, 14)
+68:0/0 = 0
+68:0/0/terrain_set = 0
+68:0/0/terrain = 0
+68:0/0/terrains_peering_bit/right_side = 0
+68:0/0/terrains_peering_bit/bottom_side = 0
+68:0/0/terrains_peering_bit/left_side = 0
+68:0/0/terrains_peering_bit/top_side = 0
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, -3, -8, -3, -8, -7)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, -3, -8, -3, -8, -7)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, -3, -8, -3, -8, -7)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, -3, -8, -3, -8, -7)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, -3, -8, -3, -8, -7)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, -3, -8, -3, -8, -7)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, -3, -8, -3, -8, -7)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, -3, -8, -3, -8, -7)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, -3, -8, -3, -8, -7)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, -3, -8, -3, -8, -7)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, -3, -8, -3, -8, -7)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, -3, -8, -3, -8, -7)
+4:2/0 = 0
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, -3, -8, -3, -8, -7)
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, -3, -8, -3, -8, -7)
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, 8, -7, 8, -3, -8, -3, -8, -7)
+
+[sub_resource type="TileSet" id="TileSet_jo3hp"]
+tile_size = Vector2i(16, 2)
+physics_layer_0/collision_layer = 1
+terrain_set_0/mode = 2
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_l6t31")
 
 [node name="level1" type="Node2D"]
 
-[node name="mapA" parent="." instance=ExtResource("1_ept53")]
+[node name="bkgd_a" parent="." instance=ExtResource("1_ept53")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAARAIYAAAAAAAIAAAASAIYAAAABAAIAAAATAIYAAAACAAIAAAAUAIYAAAABAAIAAAAVAIYAAAACAAIAAAAWAIYAAAADAAIAAAAAAE4AAAAAAAAAAAABAE4AAAABAAAAAAACAE4AAAADAAAAAAAmAE4AAAACAAEAAAAnAE4AAAADAAEAAAAlAE4AAAAAAAEAAAAJAGgAAAAAAAAAAAAKAGgAAAABAAAAAAALAGgAAAADAAAAAAAcAGgAAAAAAAEAAAAdAGgAAAACAAEAAAAeAGgAAAADAAEAAAARADwAAAAAAAIAAAASADwAAAABAAIAAAATADwAAAACAAIAAAAUADwAAAABAAIAAAAVADwAAAACAAIAAAAWADwAAAADAAIAAAAIAC4AAAAAAAAAAAAJAC4AAAABAAAAAAAKAC4AAAADAAAAAAAdAC4AAAAAAAEAAAAeAC4AAAACAAEAAAAfAC4AAAADAAEAAAADAI4AAAAAAAAAAAAEAI4AAAABAAAAAAAFAI4AAAACAAAAAAAGAI4AAAADAAAAAAAhAI4AAAAAAAEAAAAiAI4AAAABAAEAAAAjAI4AAAACAAEAAAAkAI4AAAADAAEAAAA=")
+tile_set = SubResource("TileSet_jo3hp")
 
 [node name="player" parent="." instance=ExtResource("2_3x1p4")]
-position = Vector2(34, 48)
+position = Vector2(31, 337)
 
 [node name="battery" parent="." instance=ExtResource("3_1v6r3")]
-position = Vector2(525, 184)
+position = Vector2(472, 189)
 
 [node name="refuel_station" parent="." instance=ExtResource("4_x40tn")]
-position = Vector2(320, 261)
-
-[node name="test_item" parent="." instance=ExtResource("5_il3dv")]
-position = Vector2(111, 169)
+position = Vector2(320, 112)

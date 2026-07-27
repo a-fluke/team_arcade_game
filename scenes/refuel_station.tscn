@@ -29,12 +29,13 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_cvuun")
 
 [node name="Panel2" type="Panel" parent="."]
 offset_left = -10.0
-offset_top = -3.0
+offset_top = -1.0
 offset_right = 10.0
+offset_bottom = 2.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6joqp")
 
 [node name="barrel_placer" type="Marker2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -10)
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
