@@ -35,6 +35,12 @@ func update_buttons(slot):
 		slot.device_id,
 		JOY_BUTTON_A
 	)
+	
+	input.b_previous = input.b_current
+	input.b_current = Input.is_joy_button_pressed(
+		slot.device_id,
+		JOY_BUTTON_B
+	)
 
 func update_left_stick(player):
 	player.player_input.left_stick = Vector2(

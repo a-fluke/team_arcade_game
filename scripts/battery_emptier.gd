@@ -1,8 +1,11 @@
 extends Dock
-class_name RefuelStation
+class_name Battery_Emptier
+
+signal charge(team)
+var team = "red"
 
 func _ready() -> void:
-	docking_location = $barrel_placer.global_position
+	docking_location = $battery_placer.global_position
 	$fuelTimer.wait_time = 1.0
 
 func accepts(item):
@@ -23,17 +26,23 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		body.dropped.disconnect(_dock)
 
 func _dock(item : Carryable):
-	if state == State.EMPTY or state == State.PARTIAL:
+	if (state == State.EMPTY or state == State.PARTIAL):
 		item.place(docking_location,self)
 		state = State.FULL
 		docked_item = item
-		if item.can_fuel():
+		if item.can_empty():
 			$fuelTimer.start()
 	else:
 		var rejection_loc = Vector2([1,-1].pick_random() * randi_range(10,16),0)
 		item.reject(docking_location + rejection_loc)
 
 func _on_fuel_timer_timeout() -> void:
-	if docked_item.can_fuel():
-		docked_item.increase_fuel()
-		$fuelTimer.start()
+	if docked_item.can_empty():
+		var empty = docked_item.reduce_fuel()
+		charge.emit(team)
+		if not empty:
+			$fuelTimer.start()
+		else:
+			docked_item.queue_free()
+			$fuelTimer.stop()
+		

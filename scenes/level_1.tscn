@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=4 uid="uid://di4m56ll8n04b"]
+[gd_scene load_steps=10 format=4 uid="uid://di4m56ll8n04b"]
 
+[ext_resource type="Script" path="res://scripts/level_1.gd" id="1_1y6cy"]
 [ext_resource type="PackedScene" uid="uid://bc4kxnxd2ecit" path="res://scenes/bkgd_a.tscn" id="1_ept53"]
 [ext_resource type="PackedScene" uid="uid://dddhq3q53x0hn" path="res://scenes/battery.tscn" id="3_1v6r3"]
-[ext_resource type="PackedScene" uid="uid://dw8v3d8hjehab" path="res://scenes/refuel_station.tscn" id="4_x40tn"]
+[ext_resource type="PackedScene" uid="uid://dw8v3d8hjehab" path="res://scenes/battery_charger.tscn" id="4_x40tn"]
 [ext_resource type="PackedScene" uid="uid://6bosf2nye1gb" path="res://scenes/test_item.tscn" id="5_1k0f3"]
 [ext_resource type="Texture2D" uid="uid://cfvoowqx38rrd" path="res://assets/platform_tiles.png" id="5_uo1ey"]
+[ext_resource type="PackedScene" uid="uid://8546v7m8q2fi" path="res://scenes/battery_emptier.tscn" id="6_6orjv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l6t31"]
 texture = ExtResource("5_uo1ey")
@@ -51,6 +53,7 @@ terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_l6t31")
 
 [node name="level1" type="Node2D"]
+script = ExtResource("1_1y6cy")
 
 [node name="bkgd_a" parent="." instance=ExtResource("1_ept53")]
 
@@ -67,3 +70,6 @@ position = Vector2(169, 180)
 
 [node name="test_item" parent="." instance=ExtResource("5_1k0f3")]
 position = Vector2(151, 66)
+
+[node name="battery_emptier" parent="." instance=ExtResource("6_6orjv")]
+position = Vector2(320, 252)

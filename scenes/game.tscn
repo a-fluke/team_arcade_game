@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvrchm2lit7c"]
+[gd_scene load_steps=5 format=3 uid="uid://cvrchm2lit7c"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_hrjy4"]
 [ext_resource type="Script" path="res://scripts/input_manager.gd" id="2_6772f"]
-[ext_resource type="PackedScene" uid="uid://dddhq3q53x0hn" path="res://scenes/battery.tscn" id="3_6ah83"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jn3da"]
 size = Vector2(660, 20)
@@ -40,6 +39,3 @@ shape = SubResource("RectangleShape2D_adhb5")
 [node name="leftwall" type="CollisionShape2D" parent="boundaries"]
 position = Vector2(-10, 180)
 shape = SubResource("RectangleShape2D_adhb5")
-
-[node name="battery" parent="." instance=ExtResource("3_6ah83")]
-position = Vector2(320, 36)
