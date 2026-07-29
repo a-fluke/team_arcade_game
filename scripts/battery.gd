@@ -17,10 +17,22 @@ func _ready() -> void:
 func can_fuel():
 	return fuel_level < MAX_FUEL
 
+func can_empty():
+	return fuel_level > 0
+
 func increase_fuel():
 	fuel_level += 1
 	change_battery_sprite()
 	weight = BASE_WEIGHT + fuel_level * FUEL_WEIGHT
+
+func reduce_fuel() -> bool:
+	fuel_level -= 1
+	change_battery_sprite()
+	weight = BASE_WEIGHT + fuel_level * FUEL_WEIGHT
+	if fuel_level == 0:
+		return true
+	else:
+		return false
 
 func change_battery_sprite():
 	$Sprite2D.texture = load("res://assets/battery"+str(fuel_level)+".png")

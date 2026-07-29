@@ -1,0 +1,11 @@
+extends Node2D
+
+signal start_pressed
+
+
+func _on_start_pressed() -> void:
+	start_pressed.emit()
+
+
+func _on_button_button_pressed() -> void:
+	start_pressed.emit()

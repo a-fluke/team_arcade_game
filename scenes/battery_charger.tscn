@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dw8v3d8hjehab"]
 
-[ext_resource type="Script" path="res://scripts/refuel_station.gd" id="1_px8aa"]
+[ext_resource type="Script" path="res://scripts/battery_charger.gd" id="1_px8aa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cvuun"]
 bg_color = Color(1.65302e-05, 1.65302e-05, 1.65302e-05, 1)
@@ -12,7 +12,7 @@ bg_color = Color(0, 0, 0, 1)
 radius = 8.0
 height = 32.0
 
-[node name="refuel_station" type="Node2D"]
+[node name="battery_charger" type="Node2D"]
 script = ExtResource("1_px8aa")
 
 [node name="Panel4" type="Panel" parent="."]
@@ -29,12 +29,13 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_cvuun")
 
 [node name="Panel2" type="Panel" parent="."]
 offset_left = -10.0
-offset_top = -3.0
+offset_top = -1.0
 offset_right = 10.0
+offset_bottom = 2.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6joqp")
 
 [node name="barrel_placer" type="Marker2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -10)
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

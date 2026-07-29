@@ -1,0 +1,93 @@
+[gd_scene load_steps=8 format=3 uid="uid://bml8fgv50q0gv"]
+
+[ext_resource type="Script" path="res://scripts/selection_menu.gd" id="1_b3e6n"]
+[ext_resource type="Texture2D" uid="uid://da5mn0iisryi1" path="res://assets/bkgd_empty.png" id="1_hguiy"]
+[ext_resource type="Texture2D" uid="uid://c8dcs5jtoysvd" path="res://assets/window_trimmedt-sheet.png" id="2_4n3eq"]
+[ext_resource type="FontFile" uid="uid://d0u8jmefifmwx" path="res://fonts/edit-undo/editundo.ttf" id="3_1h2f4"]
+[ext_resource type="PackedScene" uid="uid://bdcsy7ga68r23" path="res://scenes/button.tscn" id="5_p3jip"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tek2c"]
+bg_color = Color(0.2698, 0.365307, 0.38, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ig6ly"]
+bg_color = Color(0.486275, 0.294118, 0.137255, 1)
+
+[node name="selection_menu" type="Node2D"]
+script = ExtResource("1_b3e6n")
+
+[node name="bkgd" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+texture = ExtResource("1_hguiy")
+
+[node name="player_select" type="Node2D" parent="."]
+position = Vector2(320, 150)
+
+[node name="window" type="Sprite2D" parent="player_select"]
+texture = ExtResource("2_4n3eq")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="player_select"]
+offset_left = -200.0
+offset_top = -90.0
+offset_right = 200.0
+offset_bottom = 91.0
+theme_override_constants/separation = 150
+alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="player_select/HBoxContainer"]
+layout_mode = 2
+
+[node name="Red Team" type="Label" parent="player_select/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1666, 0.17199, 0.49, 1)
+theme_override_fonts/font = ExtResource("3_1h2f4")
+theme_override_font_sizes/font_size = 18
+text = "Blue Team"
+horizontal_alignment = 1
+
+[node name="Panel2" type="Panel" parent="player_select/HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(100, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tek2c")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="player_select/HBoxContainer"]
+layout_mode = 2
+
+[node name="Red Team" type="Label" parent="player_select/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.489351, 0.165665, 0.26687, 1)
+theme_override_fonts/font = ExtResource("3_1h2f4")
+theme_override_font_sizes/font_size = 18
+text = "Red Team"
+horizontal_alignment = 1
+
+[node name="Panel2" type="Panel" parent="player_select/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(100, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tek2c")
+
+[node name="level_select" type="Node2D" parent="."]
+position = Vector2(565, 335)
+
+[node name="Button" type="Button" parent="level_select"]
+offset_left = -30.0
+offset_top = -10.0
+offset_right = 30.0
+offset_bottom = 10.0
+theme_override_colors/font_hover_color = Color(0.576471, 0.788235, 0.501961, 1)
+theme_override_colors/font_pressed_color = Color(0.576471, 0.788235, 0.501961, 1)
+theme_override_colors/font_color = Color(0.756863, 0.917647, 0.701961, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_ig6ly")
+text = "level_1"
+metadata/_edit_use_anchors_ = true
+
+[node name="button" parent="." instance=ExtResource("5_p3jip")]
+position = Vector2(320, 290)
+text = "level 1"
+
+[connection signal="pressed" from="level_select/Button" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="button" to="." method="_on_button_button_pressed"]

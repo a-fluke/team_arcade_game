@@ -33,9 +33,13 @@ var held_item : Carryable = null
 var nearby_items : Array[Carryable] = []
 var facing : Vector2
 
+var team : String = "blue"
+
 # --- inputs --- #
 var horizontal_dir : int = 0
 var jump_buffer : float = 0
+var player_input : Player_Input
+var interact_button : bool = false
 
 func _ready() -> void:
 	GRAVITY = World.GRAVITY
@@ -53,25 +57,31 @@ func _physics_process(delta: float) -> void:
 	handle_gravity(delta)
 	check_jump()
 	handle_movement(delta)
+	item_interact()
 	
 	flip_player()
 	move_and_slide()
 	
 	update_jump_state()
 
-func _process(delta: float) -> void:
-	
-	item_interact()
+func _process(_delta: float) -> void:
+	pass
 	if debug:
 		debug_updates()
 
 # ----- INPUT ----- #
 func handle_input():
 	if movement_enabled:
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("jump") or player_input.a_just_pressed():
 			jump_buffer =JUMP_BUFFER_TIME
-	
-		horizontal_dir = Input.get_axis("left","right")
+		
+		if player_input.b_just_pressed():
+			interact_button = true
+		
+		var movement = player_input.left_stick.x
+		horizontal_dir = sign(movement) if abs(movement) > 0.2 else 0.0
+		
+		#horizontal_dir = Input.get_axis("left","right")
 
 # ------ JUMP FUNCTIONS ----- #
 func check_jump():
@@ -153,7 +163,7 @@ func update_modifiers():
 
 # ----- INTERACTION FUNCS ----- #
 func item_interact():
-	if Input.is_action_just_pressed("item"):
+	if interact_button:
 		if held_item:
 			held_item.drop()
 			held_item = null
@@ -162,15 +172,17 @@ func item_interact():
 			if item:
 				item.pickup(self)
 				held_item = item
+		interact_button = false
 
 func find_nearby_item() -> Carryable:
 	var closest_item = null
 	var current_score = -INF
 	for item in nearby_items:
-		var score = get_interation_score(item)
-		if score > current_score:
-			closest_item = item
-			current_score = score
+		if item.state != Carryable.State.HELD:
+			var score = get_interation_score(item)
+			if score > current_score:
+				closest_item = item
+				current_score = score
 	return closest_item
 
 func get_interation_score(item):

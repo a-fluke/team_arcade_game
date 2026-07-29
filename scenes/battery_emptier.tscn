@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://8546v7m8q2fi"]
+
+[ext_resource type="Script" path="res://scripts/battery_emptier.gd" id="1_6b77b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eh1jd"]
+bg_color = Color(0.5704, 0.768507, 0.92, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lni66"]
+bg_color = Color(0.3224, 0.434373, 0.52, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iqw2m"]
+height = 34.0
+
+[node name="battery_emptier" type="Node2D"]
+script = ExtResource("1_6b77b")
+
+[node name="Panel2" type="Panel" parent="."]
+visible = false
+offset_left = -8.0
+offset_top = -10.0
+offset_right = 8.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_eh1jd")
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+offset_left = -7.0
+offset_top = -9.0
+offset_right = 7.0
+offset_bottom = 9.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lni66")
+
+[node name="Panel3" type="Panel" parent="."]
+offset_left = -7.0
+offset_top = -9.0
+offset_right = 7.0
+offset_bottom = -6.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lni66")
+
+[node name="Panel4" type="Panel" parent="."]
+offset_left = -7.0
+offset_top = 9.0
+offset_right = 7.0
+offset_bottom = 12.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lni66")
+
+[node name="battery_placer" type="Marker2D" parent="."]
+
+[node name="fuelTimer" type="Timer" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_iqw2m")
+
+[connection signal="timeout" from="fuelTimer" to="." method="_on_fuel_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

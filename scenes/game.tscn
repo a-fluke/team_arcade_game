@@ -1,26 +1,41 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvrchm2lit7c"]
+[gd_scene load_steps=5 format=3 uid="uid://cvrchm2lit7c"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_hrjy4"]
-[ext_resource type="PackedScene" uid="uid://bc4kxnxd2ecit" path="res://scenes/map_a.tscn" id="1_k2l84"]
-[ext_resource type="PackedScene" uid="uid://bijqsfvgl8y3t" path="res://scenes/player.tscn" id="2_lpxyh"]
-[ext_resource type="PackedScene" uid="uid://dw8v3d8hjehab" path="res://scenes/refuel_station.tscn" id="3_q45q8"]
-[ext_resource type="PackedScene" uid="uid://6bosf2nye1gb" path="res://scenes/test_item.tscn" id="5_3gm60"]
-[ext_resource type="PackedScene" uid="uid://dddhq3q53x0hn" path="res://scenes/battery.tscn" id="6_hxul4"]
+[ext_resource type="Script" path="res://scripts/input_manager.gd" id="2_6772f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jn3da"]
+size = Vector2(660, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_adhb5"]
+size = Vector2(20, 380)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_hrjy4")
 
-[node name="mapA" parent="." instance=ExtResource("1_k2l84")]
+[node name="Menu_Container" type="Node2D" parent="."]
 
-[node name="player" parent="." instance=ExtResource("2_lpxyh")]
-z_index = 1
-position = Vector2(58, 331)
+[node name="Level_Container" type="Node2D" parent="."]
 
-[node name="test_item" parent="." instance=ExtResource("5_3gm60")]
-position = Vector2(565, 272)
+[node name="Input_Manager" type="Node2D" parent="."]
+script = ExtResource("2_6772f")
 
-[node name="battery" parent="." instance=ExtResource("6_hxul4")]
-position = Vector2(202, 252)
+[node name="Player_Container" type="Node2D" parent="."]
 
-[node name="refuel_station" parent="." instance=ExtResource("3_q45q8")]
-position = Vector2(320, 244)
+[node name="boundaries" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="roof" type="CollisionShape2D" parent="boundaries"]
+position = Vector2(320, -10)
+shape = SubResource("RectangleShape2D_jn3da")
+
+[node name="floor" type="CollisionShape2D" parent="boundaries"]
+position = Vector2(320, 366)
+shape = SubResource("RectangleShape2D_jn3da")
+
+[node name="rightwall" type="CollisionShape2D" parent="boundaries"]
+position = Vector2(650, 180)
+shape = SubResource("RectangleShape2D_adhb5")
+
+[node name="leftwall" type="CollisionShape2D" parent="boundaries"]
+position = Vector2(-10, 180)
+shape = SubResource("RectangleShape2D_adhb5")
