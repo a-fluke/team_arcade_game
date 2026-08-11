@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=4 uid="uid://di4m56ll8n04b"]
+[gd_scene load_steps=11 format=4 uid="uid://di4m56ll8n04b"]
 
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="1_1y6cy"]
 [ext_resource type="PackedScene" uid="uid://bc4kxnxd2ecit" path="res://scenes/bkgd_a.tscn" id="1_ept53"]
-[ext_resource type="PackedScene" uid="uid://dddhq3q53x0hn" path="res://scenes/battery.tscn" id="3_1v6r3"]
+[ext_resource type="Script" path="res://scripts/platforms.gd" id="4_j1dxo"]
 [ext_resource type="PackedScene" uid="uid://dw8v3d8hjehab" path="res://scenes/battery_charger.tscn" id="4_x40tn"]
-[ext_resource type="PackedScene" uid="uid://6bosf2nye1gb" path="res://scenes/test_item.tscn" id="5_1k0f3"]
 [ext_resource type="Texture2D" uid="uid://cfvoowqx38rrd" path="res://assets/platform_tiles.png" id="5_uo1ey"]
 [ext_resource type="PackedScene" uid="uid://8546v7m8q2fi" path="res://scenes/battery_emptier.tscn" id="6_6orjv"]
+[ext_resource type="PackedScene" uid="uid://c4qhp17msnbgc" path="res://scenes/score_keeper.tscn" id="8_bpfsj"]
+[ext_resource type="Texture2D" uid="uid://rajpm3n07ghg" path="res://assets/cable.png" id="9_6843k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l6t31"]
 texture = ExtResource("5_uo1ey")
@@ -57,19 +58,49 @@ script = ExtResource("1_1y6cy")
 
 [node name="bkgd_a" parent="." instance=ExtResource("1_ept53")]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="platforms" type="TileMapLayer" parent="."]
 texture_filter = 1
 tile_map_data = PackedByteArray("AAARAIYAAAAAAAIAAAASAIYAAAABAAIAAAATAIYAAAACAAIAAAAUAIYAAAABAAIAAAAVAIYAAAACAAIAAAAWAIYAAAADAAIAAAAAAE4AAAAAAAAAAAABAE4AAAABAAAAAAACAE4AAAADAAAAAAAmAE4AAAACAAEAAAAnAE4AAAADAAEAAAAlAE4AAAAAAAEAAAAJAGgAAAAAAAAAAAAKAGgAAAABAAAAAAALAGgAAAADAAAAAAAcAGgAAAAAAAEAAAAdAGgAAAACAAEAAAAeAGgAAAADAAEAAAARADwAAAAAAAIAAAASADwAAAABAAIAAAATADwAAAACAAIAAAAUADwAAAABAAIAAAAVADwAAAACAAIAAAAWADwAAAADAAIAAAAIAC4AAAAAAAAAAAAJAC4AAAABAAAAAAAKAC4AAAADAAAAAAAdAC4AAAAAAAEAAAAeAC4AAAACAAEAAAAfAC4AAAADAAEAAAADAI4AAAAAAAAAAAAEAI4AAAABAAAAAAAFAI4AAAACAAAAAAAGAI4AAAADAAAAAAAhAI4AAAAAAAEAAAAiAI4AAAABAAEAAAAjAI4AAAACAAEAAAAkAI4AAAADAAEAAAA=")
 tile_set = SubResource("TileSet_jo3hp")
+script = ExtResource("4_j1dxo")
 
 [node name="refuel_station" parent="." instance=ExtResource("4_x40tn")]
-position = Vector2(320, 112)
+position = Vector2(320, 262)
 
-[node name="battery" parent="." instance=ExtResource("3_1v6r3")]
-position = Vector2(169, 180)
+[node name="towers" type="Node2D" parent="."]
 
-[node name="test_item" parent="." instance=ExtResource("5_1k0f3")]
-position = Vector2(151, 66)
+[node name="blue_tower" parent="towers" instance=ExtResource("6_6orjv")]
+position = Vector2(304, 114)
+team = "blue"
 
-[node name="battery_emptier" parent="." instance=ExtResource("6_6orjv")]
-position = Vector2(320, 252)
+[node name="cable" type="Sprite2D" parent="towers"]
+texture_filter = 1
+position = Vector2(151, 43.453)
+scale = Vector2(1.11678, 0.93081)
+texture = ExtResource("9_6843k")
+flip_h = true
+
+[node name="red_tower" parent="towers" instance=ExtResource("6_6orjv")]
+position = Vector2(336, 114)
+
+[node name="cable2" type="Sprite2D" parent="towers"]
+texture_filter = 1
+position = Vector2(489, 43.453)
+rotation = 3.14159
+scale = Vector2(1.117, -0.931)
+texture = ExtResource("9_6843k")
+flip_h = true
+
+[node name="batteries" type="Node2D" parent="."]
+
+[node name="spawn_timer" type="Timer" parent="batteries"]
+one_shot = true
+
+[node name="Blue_Score" parent="." instance=ExtResource("8_bpfsj")]
+position = Vector2(145, 7)
+
+[node name="Red_Score" parent="." instance=ExtResource("8_bpfsj")]
+position = Vector2(495, 7)
+team = "red"
+
+[connection signal="timeout" from="batteries/spawn_timer" to="." method="_on_spawn_timer_timeout"]

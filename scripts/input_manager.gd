@@ -1,6 +1,7 @@
 extends Node
 
 var PLAYER_CURSOR = preload("res://scenes/player_cursor.tscn")
+var PLAYER_SELECT = preload("res://scenes/player_select.tscn")
 
 class PlayerSlot:
 	var device_id: int
@@ -15,13 +16,13 @@ var player_device_map : Dictionary = {}
 func _physics_process(delta: float) -> void:
 	for slot in player_slots:
 		update_input(slot)
-		update_left_stick(slot)
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventJoypadButton and event.pressed:
-		var device = event.device
-		if !device_is_joined(device):
-			join(device)
+	if get_parent().game_state == get_parent().Game_State.SELECT:
+		if event is InputEventJoypadButton and event.pressed:
+			var device = event.device
+			if !device_is_joined(device):
+				join(device)
 
 func update_input(player : PlayerSlot):
 	update_buttons(player)
@@ -42,11 +43,16 @@ func update_buttons(slot):
 		JOY_BUTTON_B
 	)
 
-func update_left_stick(player):
-	player.player_input.left_stick = Vector2(
-			Input.get_joy_axis(player.device_id, JOY_AXIS_LEFT_X),
-			Input.get_joy_axis(player.device_id, JOY_AXIS_LEFT_Y)
+func update_left_stick(slot):
+	var input = slot.player_input
+	input.left_previous = input.left_current
+	input.right_previous = input.right_current
+	input.left_stick = Vector2(
+			Input.get_joy_axis(slot.device_id, JOY_AXIS_LEFT_X),
+			Input.get_joy_axis(slot.device_id, JOY_AXIS_LEFT_Y)
 		)
+	input.left_current = input.left_stick.x < -input.stick_thresh
+	input.right_current = input.left_stick.x > input.stick_thresh
 
 func device_is_joined(device):
 	for player in player_slots:
@@ -55,23 +61,25 @@ func device_is_joined(device):
 	return false
 
 func join(device):
-	var slot = PlayerSlot.new()
-	var player_id = player_slots.size()
+	if World.player_count < World.MAX_PLAYERS:
+		var slot = PlayerSlot.new()
+		var player_id = player_slots.size()
 
-	# add slot for player
-	slot.device_id = device
-	slot.player_input = Player_Input.new()
-	player_slots.append(slot)
-	print(slot.player_input)
-	# create player cursor
-	var player_cursor = PLAYER_CURSOR.instantiate()
-	player_cursor.player_id = player_id
-	player_cursor.player_input = slot.player_input
-	
-	# map device to player
-	player_device_map[device] = player_id
-	
-	get_tree().current_scene.get_node("Player_Container").add_child(player_cursor)
+		# add slot for player
+		slot.device_id = device
+		slot.player_input = Player_Input.new()
+		player_slots.append(slot)
+		
+		# create player select
+		var player_select = PLAYER_SELECT.instantiate()
+		player_select.player_input = slot.player_input
+		
+		
+		#get_tree().current_scene.get_node("Menu_Container/selection_menu").add_player(player_select)
+		get_tree().current_scene.get_node("Player_Container").add_selector(player_select)
+		
+		# map device to player
+		player_device_map[device] = player_id
 
 func get_player_id(device):
 	return player_device_map[device]

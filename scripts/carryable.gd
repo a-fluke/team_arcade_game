@@ -12,40 +12,41 @@ enum State {
 var COLLISION_LAYER : int = 3
 var COLLISION_MASK  : int = 1
 
+var spawn_position : Vector2
 var state = State.GROUND
 var carrier = null
 var weight : float = 0
 
 func pickup(player):
-	if state == State.GROUND:
-		state = State.HELD
-		carrier = player
-		z_index = 1
-	elif state == State.PLACED:
-		state = State.HELD
-		carrier.empty()
-		carrier = player
-		z_index = 1
-	else:
+	# item on ground
+	if state == State.HELD:
 		pass
+	else:
+		if state == State.PLACED:
+			carrier.empty()
+		state = State.HELD
+		carrier = player
+		z_index = World.HELD_ITEM_Z
+
 
 func drop():
 	carrier = null
 	state = State.GROUND
 	velocity = Vector2.ZERO
 	dropped.emit(self)
-	z_index = 0
+	z_index = World.DROPPED_ITEM_Z
 
 func place(dock_loc,dock):
 	position = dock_loc
 	state = State.PLACED
 	carrier = dock
 	velocity = Vector2.ZERO
-	z_index = 0
+	z_index = World.PLACED_ITEM_Z
 
 func reject(location):
 	position = location
 	state = State.GROUND
+	z_index = World.DROPPED_ITEM_Z
 
 func _physics_process(delta: float) -> void:
 	match state:

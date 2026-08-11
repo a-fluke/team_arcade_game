@@ -1,45 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://dw8v3d8hjehab"]
+[gd_scene load_steps=4 format=3 uid="uid://dw8v3d8hjehab"]
 
 [ext_resource type="Script" path="res://scripts/battery_charger.gd" id="1_px8aa"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cvuun"]
-bg_color = Color(1.65302e-05, 1.65302e-05, 1.65302e-05, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6joqp"]
-bg_color = Color(0, 0, 0, 1)
+[ext_resource type="Texture2D" uid="uid://ce6vsycc17ssl" path="res://assets/charger.png" id="2_0ho4j"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kmhdt"]
 radius = 8.0
-height = 32.0
+height = 20.0
 
 [node name="battery_charger" type="Node2D"]
 script = ExtResource("1_px8aa")
 
-[node name="Panel4" type="Panel" parent="."]
-offset_left = 6.0
-offset_top = -5.0
-offset_right = 10.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_cvuun")
-
-[node name="Panel3" type="Panel" parent="."]
-offset_left = -10.0
-offset_top = -5.0
-offset_right = -6.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_cvuun")
-
-[node name="Panel2" type="Panel" parent="."]
-offset_left = -10.0
-offset_top = -1.0
-offset_right = 10.0
-offset_bottom = 2.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_6joqp")
-
 [node name="barrel_placer" type="Marker2D" parent="."]
-position = Vector2(0, -10)
+position = Vector2(0, -12)
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 position = Vector2(0, -8)
+collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -48,6 +24,9 @@ shape = SubResource("CapsuleShape2D_kmhdt")
 
 [node name="fuelTimer" type="Timer" parent="."]
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[node name="sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, -18)
+texture = ExtResource("2_0ho4j")
+
 [connection signal="timeout" from="fuelTimer" to="." method="_on_fuel_timer_timeout"]

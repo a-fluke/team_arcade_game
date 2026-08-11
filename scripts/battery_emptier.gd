@@ -2,28 +2,21 @@ extends Dock
 class_name Battery_Emptier
 
 signal charge(team)
-var team = "red"
+signal emptied(battery)
+@export var team = "red"
 
 func _ready() -> void:
+	$Sprite2D.texture = load("res://assets/%s_tower.png"%team)
 	docking_location = $battery_placer.global_position
 	$fuelTimer.wait_time = 1.0
 
-func accepts(item):
-	return item is Battery
+func accepts(item,player):
+	return item is Battery and player.player_info.team == team
 
 func empty():
 	state = State.EMPTY
 	$fuelTimer.stop()
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if accepts(body):
-		valid_nearby_items.append(body)
-		body.dropped.connect(_dock)
-
-func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body in valid_nearby_items:
-		valid_nearby_items.erase(body)
-		body.dropped.disconnect(_dock)
 
 func _dock(item : Carryable):
 	if (state == State.EMPTY or state == State.PARTIAL):
@@ -43,6 +36,8 @@ func _on_fuel_timer_timeout() -> void:
 		if not empty:
 			$fuelTimer.start()
 		else:
-			docked_item.queue_free()
+			emptied.emit(docked_item)
+			state = State.EMPTY
+			docked_item = null
 			$fuelTimer.stop()
 		

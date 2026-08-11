@@ -4,7 +4,7 @@ class_name Player_Cursor
 signal interact
 
 var player_id : int
-var speed : int = 500
+var speed : int = 400
 var player_input : Player_Input
 var radius : int = 3
 
