@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://guivuc4unike"]
+
+[ext_resource type="Script" path="res://scripts/score_meter.gd" id="1_g6mdg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trfhu"]
+bg_color = Color(0.98, 0.849333, 0, 1)
+
+[node name="Score_meter" type="Node2D"]
+script = ExtResource("1_g6mdg")
+
+[node name="Panel" type="Panel" parent="."]
+offset_top = -33.0
+offset_right = 25.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_trfhu")

@@ -31,21 +31,24 @@ var move_modifier : float = 0.0
 
 var held_item : Carryable = null
 var nearby_items : Array[Carryable] = []
+var nearby_docks : Array[Dock] = []
 var facing : Vector2
 
-var team : String = "blue"
+#var team : String = "red"
 
 # --- inputs --- #
 var horizontal_dir : int = 0
 var jump_buffer : float = 0
 var player_input : Player_Input
 var interact_button : bool = false
+var player_info : Player_Info
 
 func _ready() -> void:
 	GRAVITY = World.GRAVITY
 	HOLD_OFFSET = $hold_point.position.x
 	RANGE_OFFSET = $range.position.x
 	facing = Vector2.RIGHT if not $sprite.flip_h else Vector2.LEFT
+	z_index = World.PLAYER_Z
 	if debug:
 		debug_setup()
 
@@ -63,6 +66,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	update_jump_state()
+	animate()
 
 func _process(_delta: float) -> void:
 	pass
@@ -164,9 +168,16 @@ func update_modifiers():
 # ----- INTERACTION FUNCS ----- #
 func item_interact():
 	if interact_button:
+		# holding item
 		if held_item:
-			held_item.drop()
-			held_item = null
+			var docked = dock_item(held_item)
+			# try to dock item
+			if docked:
+				held_item = null
+			else:
+				held_item.drop()
+				held_item = null
+		# not holding item
 		else:
 			var item = find_nearby_item()
 			if item:
@@ -193,18 +204,37 @@ func get_interation_score(item):
 		facing_bonus = 1000
 	return facing_bonus - distance
 
+func dock_item(item : Carryable) -> bool:
+	# try to dock item
+	# return 0 if successful, 1 if no suitable dock is found, 2 if no docks are available
+	if nearby_docks.size() > 0:
+		var closest_dock = null
+		var current_score = -INF
+		for dock in nearby_docks:
+			if dock.accepts(item,self):
+				var score = get_interation_score(dock)
+				if score > current_score:
+					closest_dock = dock
+					current_score = score
+		if closest_dock:
+			closest_dock._dock(item)
+			return true
+	return false
 # ----- ANIMATION FUNCS ----- #
 func flip_player():
 	if velocity.x < 0: 
-		$sprite.flip_h = true
+		$AnimatedSprite2D.flip_h = true
 		$hold_point.position.x = -HOLD_OFFSET
 		$range.position.x = -RANGE_OFFSET
 		facing = Vector2.LEFT
 	elif velocity.x > 0:
-		$sprite.flip_h = false
+		$AnimatedSprite2D.flip_h = false
 		$hold_point.position.x = HOLD_OFFSET
 		$range.position.x = RANGE_OFFSET
 		facing = Vector2.RIGHT
+
+func animate():
+	$AnimatedSprite2D.play("%s_%s_idle"%[player_info.color,player_info.team])
 
 # ----- UTILITIES ----- #
 func debug_setup():
@@ -220,3 +250,11 @@ func _on_range_body_entered(body: Node2D) -> void:
 func _on_range_body_exited(body: Node2D) -> void:
 	if body is Carryable:
 		nearby_items.erase(body)
+
+func _on_range_area_entered(area: Area2D) -> void:
+	if area.get_parent() is Dock:
+		nearby_docks.append(area.get_parent())
+
+func _on_range_area_exited(area: Area2D) -> void:
+	if area.get_parent() is Dock:
+		nearby_docks.erase(area.get_parent())

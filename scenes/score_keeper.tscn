@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4qhp17msnbgc"]
+
+[ext_resource type="Script" path="res://scripts/score_keeper.gd" id="1_31f25"]
+[ext_resource type="Texture2D" uid="uid://cja88u8t5141h" path="res://assets/ui/red_ui_back.png" id="2_wg1lr"]
+[ext_resource type="Texture2D" uid="uid://dqawckquqsilq" path="res://assets/ui/red_ui.png" id="3_dpeos"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6rhw"]
+bg_color = Color(0.980392, 0.85098, 0, 1)
+
+[node name="Score_keeper" type="Node2D"]
+script = ExtResource("1_31f25")
+
+[node name="background" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1, 0.75)
+texture = ExtResource("2_wg1lr")
+
+[node name="charge" type="Panel" parent="."]
+offset_left = 125.0
+offset_top = -8.0
+offset_right = 125.0
+offset_bottom = 7.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_s6rhw")
+
+[node name="foreground" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1, 0.75)
+texture = ExtResource("3_dpeos")

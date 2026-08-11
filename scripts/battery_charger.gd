@@ -1,29 +1,22 @@
 extends Dock
 class_name BatteryCharger
 
+@export var team_accept : String = "red"
+
 func _ready() -> void:
 	docking_location = $barrel_placer.global_position
 	$fuelTimer.wait_time = 1.0
 
-func accepts(item):
+func accepts(item,player):
 	return item is Battery
 
 func empty():
 	state = State.EMPTY
 	$fuelTimer.stop()
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if accepts(body):
-		valid_nearby_items.append(body)
-		body.dropped.connect(_dock)
-
-func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body in valid_nearby_items:
-		valid_nearby_items.erase(body)
-		body.dropped.disconnect(_dock)
 
 func _dock(item : Carryable):
-	if state == State.EMPTY or state == State.PARTIAL:
+	if (state == State.EMPTY or state == State.PARTIAL):
 		item.place(docking_location,self)
 		state = State.FULL
 		docked_item = item

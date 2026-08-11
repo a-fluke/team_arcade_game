@@ -7,12 +7,12 @@ enum State {
 	FULL
 }
 
-var valid_nearby_items : Array[Carryable] = []
+# var valid_nearby_items : Array[Carryable] = []
 var docking_location : Vector2 = self.global_position
 var state := State.EMPTY
 var docked_item : Carryable
 
-func accepts(item):
+func accepts(item,_player):
 	return item is Carryable
 
 func empty():
@@ -20,3 +20,4 @@ func empty():
 
 func _dock(item : Carryable):
 	state = State.FULL
+	docked_item = item

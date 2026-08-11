@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvrchm2lit7c"]
+[gd_scene load_steps=6 format=3 uid="uid://cvrchm2lit7c"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_hrjy4"]
 [ext_resource type="Script" path="res://scripts/input_manager.gd" id="2_6772f"]
+[ext_resource type="Script" path="res://scenes/player_container.gd" id="3_j4x0n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jn3da"]
 size = Vector2(660, 20)
@@ -20,6 +21,11 @@ script = ExtResource("1_hrjy4")
 script = ExtResource("2_6772f")
 
 [node name="Player_Container" type="Node2D" parent="."]
+script = ExtResource("3_j4x0n")
+
+[node name="Selectors" type="Node2D" parent="Player_Container"]
+
+[node name="Players" type="Node2D" parent="Player_Container"]
 
 [node name="boundaries" type="StaticBody2D" parent="."]
 collision_mask = 0

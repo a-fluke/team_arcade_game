@@ -2,29 +2,11 @@
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_ou7hj"]
 [ext_resource type="Texture2D" uid="uid://da5mn0iisryi1" path="res://assets/bkgd_empty.png" id="1_selye"]
-[ext_resource type="FontFile" uid="uid://d0u8jmefifmwx" path="res://fonts/edit-undo/editundo.ttf" id="2_wfubu"]
 [ext_resource type="PackedScene" uid="uid://bdcsy7ga68r23" path="res://scenes/button.tscn" id="4_l3cny"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8g85"]
-bg_color = Color(0.854902, 0.568627, 0.34902, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_di44t"]
-bg_color = Color(0.855437, 0.569749, 0.347854, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6a8m"]
-bg_color = Color(0.487585, 0.292319, 0.137444, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+[ext_resource type="Texture2D" uid="uid://vi8mrobqyb74" path="res://assets/buttons/start_A.png" id="4_nshrb"]
+[ext_resource type="Texture2D" uid="uid://bcfd7thlmjoi8" path="res://assets/buttons/start_B.png" id="5_ld1xs"]
+[ext_resource type="Texture2D" uid="uid://dfi2wg7rdsjqi" path="res://assets/buttons/quit_A.png" id="6_2n4cy"]
+[ext_resource type="Texture2D" uid="uid://cxkystyn211e4" path="res://assets/buttons/quit_B.png" id="7_2d4ml"]
 
 [node name="menu" type="Node2D"]
 script = ExtResource("1_ou7hj")
@@ -33,26 +15,43 @@ script = ExtResource("1_ou7hj")
 position = Vector2(320, 180)
 texture = ExtResource("1_selye")
 
-[node name="Start" type="Button" parent="."]
-offset_left = 533.0
-offset_top = 302.0
-offset_right = 613.0
-offset_bottom = 332.0
-theme_override_colors/font_disabled_color = Color(0.756863, 0.917647, 0.701961, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.578383, 0.789928, 0.503875, 1)
-theme_override_colors/font_hover_color = Color(0.576471, 0.788235, 0.501961, 1)
-theme_override_colors/font_pressed_color = Color(0.576471, 0.788235, 0.501961, 1)
-theme_override_colors/font_focus_color = Color(0.756863, 0.917647, 0.701961, 1)
-theme_override_colors/font_color = Color(0.755802, 0.918571, 0.703718, 1)
-theme_override_colors/font_outline_color = Color(0.756863, 0.917647, 0.701961, 1)
-theme_override_fonts/font = ExtResource("2_wfubu")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a8g85")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_di44t")
-theme_override_styles/normal = SubResource("StyleBoxFlat_v6a8m")
-text = "Start"
-
 [node name="button" parent="." instance=ExtResource("4_l3cny")]
-position = Vector2(320, 180)
+position = Vector2(318, 103)
 
-[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[node name="button_manager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 245.0
+offset_top = 208.0
+offset_right = 285.0
+offset_bottom = 248.0
+
+[node name="start" type="TextureButton" parent="button_manager"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = -61.0
+offset_right = 149.0
+offset_bottom = -29.0
+texture_normal = ExtResource("4_nshrb")
+texture_pressed = ExtResource("5_ld1xs")
+texture_hover = ExtResource("5_ld1xs")
+texture_focused = ExtResource("5_ld1xs")
+stretch_mode = 3
+
+[node name="quit" type="TextureButton" parent="button_manager"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = -13.0
+offset_right = 146.0
+offset_bottom = 18.0
+texture_normal = ExtResource("6_2n4cy")
+texture_pressed = ExtResource("7_2d4ml")
+texture_hover = ExtResource("7_2d4ml")
+texture_focused = ExtResource("7_2d4ml")
+stretch_mode = 3
+
 [connection signal="button_pressed" from="button" to="." method="_on_button_button_pressed"]
+[connection signal="pressed" from="button_manager/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="button_manager/quit" to="." method="_on_quit_pressed"]
