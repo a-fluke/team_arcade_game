@@ -21,6 +21,8 @@ func _ready() -> void:
 	$towers/blue_tower.emptied.connect(_free_battery)
 	$towers/red_tower.charge.connect(_charge_ship)
 	$towers/red_tower.emptied.connect(_free_battery)
+	$cable_charging/Blue_cable.charge.connect(_charge_ship)
+	$cable_charging/Red_cable.charge.connect(_charge_ship)
 
 func _process(_delta: float) -> void:
 	if battery_count < 2 and $batteries/spawn_timer.is_stopped():

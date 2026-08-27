@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://cglwi8ni4pq5s"]
+
+[ext_resource type="Script" path="res://scripts/outlet.gd" id="1_v7j54"]
+[ext_resource type="Texture2D" uid="uid://enga6ka1sgl4" path="res://assets/outlet/blue_outlet.png" id="2_r7x0g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4rbk5"]
+size = Vector2(14.25, 20)
+
+[node name="Outlet" type="Node2D"]
+script = ExtResource("1_v7j54")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_r7x0g")
+
+[node name="cable_placer" type="Marker2D" parent="."]
+position = Vector2(8, 0)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-3, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-4, 0)
+shape = SubResource("RectangleShape2D_4rbk5")
+
+[node name="chargeTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="chargeTimer" to="." method="_on_charge_timer_timeout"]

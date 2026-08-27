@@ -1,6 +1,6 @@
 extends Node2D
 
-signal readied_up
+signal readied_up(player,ready)
 
 var columns_x = {
 	'blue' : 160,
@@ -20,6 +20,7 @@ var info : Player_Info
 
 func _ready() -> void:
 	get_first_color()
+	$ready.hide()
 
 func _physics_process(delta: float) -> void:
 	if !player_ready:
@@ -49,12 +50,15 @@ func update_info():
 
 func ready_up():
 	player_ready = true
-	readied_up.emit()
+	$ready.show()
+	readied_up.emit(self,true)
 
 func unready():
 	column = 'neutral'
 	target_position.x = columns_x[column]
+	$ready.hide()
 	player_ready = false
+	readied_up.emit(self,false)
 
 func move_left():
 	match column:

@@ -1,0 +1,97 @@
+[gd_scene load_steps=12 format=3 uid="uid://dijamkq22s63y"]
+
+[ext_resource type="Script" path="res://scenes/cable.gd" id="1_4ca1u"]
+[ext_resource type="PackedScene" uid="uid://vlh82ksixmt4" path="res://scenes/plug.tscn" id="2_4jp8c"]
+[ext_resource type="Script" path="res://scripts/charge_affect.gd" id="2_k7joo"]
+[ext_resource type="Texture2D" uid="uid://cn0dmyvkefw58" path="res://assets/outlet/spool.png" id="3_xgjyu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhlsc"]
+atlas = ExtResource("3_xgjyu")
+region = Rect2(2, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eb4el"]
+atlas = ExtResource("3_xgjyu")
+region = Rect2(20, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xnsv1"]
+atlas = ExtResource("3_xgjyu")
+region = Rect2(38, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c52wr"]
+atlas = ExtResource("3_xgjyu")
+region = Rect2(2, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5q4us"]
+atlas = ExtResource("3_xgjyu")
+region = Rect2(38, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k86fj"]
+atlas = ExtResource("3_xgjyu")
+region = Rect2(20, 0, 16, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ux5xl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhlsc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eb4el")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xnsv1")
+}],
+"loop": true,
+"name": &"unwind",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c52wr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5q4us")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k86fj")
+}],
+"loop": true,
+"name": &"wind",
+"speed": 5.0
+}]
+
+[node name="cable" type="Node2D"]
+script = ExtResource("1_4ca1u")
+
+[node name="Outline" type="Line2D" parent="."]
+width = 5.0
+default_color = Color(0.0901961, 0.0823529, 0.0862745, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line" type="Line2D" parent="."]
+width = 3.0
+default_color = Color(0.337255, 0.309804, 0.356863, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="charge_affect" type="Node2D" parent="."]
+script = ExtResource("2_k7joo")
+
+[node name="plug" parent="." instance=ExtResource("2_4jp8c")]
+
+[node name="spool" type="AnimatedSprite2D" parent="."]
+position = Vector2(27, -1)
+sprite_frames = SubResource("SpriteFrames_ux5xl")
+animation = &"wind"
+
+[node name="chargeTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="charge_at_end" from="charge_affect" to="." method="_on_charge_affect_charge_at_end"]
+[connection signal="docked" from="plug" to="." method="_on_plug_docked"]
+[connection signal="removed" from="plug" to="." method="_on_plug_removed"]
+[connection signal="timeout" from="chargeTimer" to="." method="_on_charge_timer_timeout"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3bdoxx1q1tg"
-path="res://.godot/imported/charger_frgd_open.png-0645adb2f440a98c92b163dfb532cc4e.ctex"
+uid="uid://b8o42pcdkoke0"
+path="res://.godot/imported/red_docked.png-ee624d3b16d3725ceb9ba108e62bdaf9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/charger_frgd_open.png"
-dest_files=["res://.godot/imported/charger_frgd_open.png-0645adb2f440a98c92b163dfb532cc4e.ctex"]
+source_file="res://assets/outlet/red_docked.png"
+dest_files=["res://.godot/imported/red_docked.png-ee624d3b16d3725ceb9ba108e62bdaf9.ctex"]
 
 [params]
 

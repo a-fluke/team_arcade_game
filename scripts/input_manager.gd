@@ -23,6 +23,16 @@ func _input(event: InputEvent) -> void:
 			var device = event.device
 			if !device_is_joined(device):
 				join(device)
+		elif event.is_action_pressed("right") or \
+			event.is_action_pressed("left") or \
+			event.is_action_pressed("up") or \
+			event.is_action_pressed("down") or \
+			event.is_action_pressed("item") or \
+			event.is_action_pressed("jump"):
+				var device = -1
+				if !device_is_joined(device):
+					join(device)
+
 
 func update_input(player : PlayerSlot):
 	update_buttons(player)
@@ -32,25 +42,34 @@ func update_buttons(slot):
 	var input = slot.player_input
 	
 	input.a_previous = input.a_current
-	input.a_current = Input.is_joy_button_pressed(
-		slot.device_id,
-		JOY_BUTTON_A
-	)
-	
 	input.b_previous = input.b_current
-	input.b_current = Input.is_joy_button_pressed(
-		slot.device_id,
-		JOY_BUTTON_B
-	)
+	
+	if slot.device_id != -1:
+		input.a_current = Input.is_joy_button_pressed(
+			slot.device_id,
+			JOY_BUTTON_A
+		)
+		
+		
+		input.b_current = Input.is_joy_button_pressed(
+			slot.device_id,
+			JOY_BUTTON_B
+		)
+	else:
+		input.a_current = Input.is_action_just_pressed("jump")
+		input.b_current = Input.is_action_just_pressed("item")
 
 func update_left_stick(slot):
 	var input = slot.player_input
 	input.left_previous = input.left_current
 	input.right_previous = input.right_current
-	input.left_stick = Vector2(
-			Input.get_joy_axis(slot.device_id, JOY_AXIS_LEFT_X),
-			Input.get_joy_axis(slot.device_id, JOY_AXIS_LEFT_Y)
-		)
+	if slot.device_id != -1:
+		input.left_stick = Vector2(
+				Input.get_joy_axis(slot.device_id, JOY_AXIS_LEFT_X),
+				Input.get_joy_axis(slot.device_id, JOY_AXIS_LEFT_Y)
+			)
+	else:
+		input.left_stick = Input.get_vector("left","right","up","down")
 	input.left_current = input.left_stick.x < -input.stick_thresh
 	input.right_current = input.left_stick.x > input.stick_thresh
 
@@ -73,7 +92,6 @@ func join(device):
 		# create player select
 		var player_select = PLAYER_SELECT.instantiate()
 		player_select.player_input = slot.player_input
-		
 		
 		#get_tree().current_scene.get_node("Menu_Container/selection_menu").add_player(player_select)
 		get_tree().current_scene.get_node("Player_Container").add_selector(player_select)

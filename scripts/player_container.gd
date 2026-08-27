@@ -6,6 +6,8 @@ var selection_row = 0
 const SELECT_START_HEIGHT = 72
 const SELECT_SPACING = 36
 
+var player_ready_array : Array[bool]
+
 
 func add_selector(selector):
 	selector.row = selection_row
@@ -19,6 +21,9 @@ func add_selector(selector):
 	Info.player_id = selector.row
 	
 	selector.info = Info
+	
+	selector.readied_up.connect(_on_player_ready_update)
+	player_ready_array.append(false)
 	
 	$Selectors.add_child(selector)
 
@@ -38,3 +43,12 @@ func selectors_to_players():
 		player.player_input = inputs[i]
 		player.player_info = infos[i]
 		$Players.add_child(player)
+
+
+func _on_player_ready_update(player,status):
+	player_ready_array[player.row] = status
+
+
+func players_ready():
+	var all_true = player_ready_array.all(func(element): return element == true)
+	return all_true

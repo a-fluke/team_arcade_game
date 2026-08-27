@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyigj37n85y8h"
-path="res://.godot/imported/Silly_Placeholders.png-5fdbfe04e9cda35183f1e181b1303d0f.ctex"
+uid="uid://cxi1luckes4rc"
+path="res://.godot/imported/blue_docked.png-332a7b7c248550147f674828a0154ba9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Silly_Placeholders.png"
-dest_files=["res://.godot/imported/Silly_Placeholders.png-5fdbfe04e9cda35183f1e181b1303d0f.ctex"]
+source_file="res://assets/outlet/blue_docked.png"
+dest_files=["res://.godot/imported/blue_docked.png-332a7b7c248550147f674828a0154ba9.ctex"]
 
 [params]
 

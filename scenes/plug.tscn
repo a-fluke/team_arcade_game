@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://vlh82ksixmt4"]
+
+[ext_resource type="Script" path="res://scripts/plug.gd" id="1_dtvrp"]
+[ext_resource type="Texture2D" uid="uid://c2isenmcp8rjc" path="res://assets/outlet/blue_plug.png" id="2_ybu3d"]
+
+[node name="plug" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_dtvrp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ybu3d")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-3, 10, -5, 8, -5, -7, -3, -9, 1, -9, 5, -5, 9, -5, 9, -3, 13, -3, 13, 4, 9, 4, 9, 6, 5, 6, 1, 10)
+
+[node name="cablePoint" type="Marker2D" parent="."]
+position = Vector2(13, 0.5)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbk6wa80lm83d"
-path="res://.godot/imported/charger_bkgd.png-a86905712ae844ff1dc13d41c14669e4.ctex"
+uid="uid://c2isenmcp8rjc"
+path="res://.godot/imported/blue_plug.png-7e5701d9619b6aedf5bd2ba7c2780901.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/charger_bkgd.png"
-dest_files=["res://.godot/imported/charger_bkgd.png-a86905712ae844ff1dc13d41c14669e4.ctex"]
+source_file="res://assets/outlet/blue_plug.png"
+dest_files=["res://.godot/imported/blue_plug.png-7e5701d9619b6aedf5bd2ba7c2780901.ctex"]
 
 [params]
 

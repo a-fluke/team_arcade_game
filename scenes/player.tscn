@@ -354,11 +354,17 @@ shape = SubResource("CapsuleShape2D_bnpi4")
 [node name="hold_point" type="Node2D" parent="."]
 position = Vector2(8, 0)
 
+[node name="plug_hold_point" type="Node2D" parent="."]
+position = Vector2(-4, -8)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-1, 0)
 sprite_frames = SubResource("SpriteFrames_ptp33")
 animation = &"yellow_red_idle"
+
+[node name="boost_spawn" type="Marker2D" parent="."]
+position = Vector2(-6, 8)
 
 [connection signal="area_entered" from="range" to="." method="_on_range_area_entered"]
 [connection signal="area_exited" from="range" to="." method="_on_range_area_exited"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_hrjy4"]
 [ext_resource type="Script" path="res://scripts/input_manager.gd" id="2_6772f"]
-[ext_resource type="Script" path="res://scenes/player_container.gd" id="3_j4x0n"]
+[ext_resource type="Script" path="res://scripts/player_container.gd" id="3_j4x0n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jn3da"]
 size = Vector2(660, 20)

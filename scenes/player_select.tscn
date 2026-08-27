@@ -1,7 +1,8 @@
-[gd_scene load_steps=52 format=3 uid="uid://c52h411cjjd0w"]
+[gd_scene load_steps=53 format=3 uid="uid://c52h411cjjd0w"]
 
 [ext_resource type="Script" path="res://scripts/player_select.gd" id="1_u5yx8"]
 [ext_resource type="Texture2D" uid="uid://c1oc8vw7fsoo6" path="res://assets/character/selection/head.png" id="2_it5ue"]
+[ext_resource type="FontFile" uid="uid://d0u8jmefifmwx" path="res://fonts/edit-undo/editundo.ttf" id="3_qt35k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wjcb0"]
 atlas = ExtResource("2_it5ue")
@@ -469,3 +470,18 @@ script = ExtResource("1_u5yx8")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_n0sy0")
 animation = &"yellow_red"
+
+[node name="ready" type="Label" parent="."]
+texture_filter = 1
+offset_left = -20.0
+offset_top = 5.0
+offset_right = 22.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0.909804, 0.537255, 0.215686, 1)
+theme_override_colors/font_outline_color = Color(0.2, 0.235294, 0.141176, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_qt35k")
+theme_override_font_sizes/font_size = 12
+text = "ready"
+horizontal_alignment = 1
+vertical_alignment = 1

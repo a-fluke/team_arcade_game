@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var boost_scene = preload("res://scenes/boost.tscn")
+
 # ------- VARIABLES ------- #
 @export var debug : bool = false
 # ------- TIMERS ------- #
@@ -21,6 +23,7 @@ var JUMP_FORCE_GROUND : float = 280.0
 var JUMP_FORCE_AIR : float = 220.0
 var HOLD_OFFSET : int
 var RANGE_OFFSET : int
+var BOOST_OFFSET : int
 
 # --- states --- #
 var coyote_time : float = 0
@@ -47,6 +50,7 @@ func _ready() -> void:
 	GRAVITY = World.GRAVITY
 	HOLD_OFFSET = $hold_point.position.x
 	RANGE_OFFSET = $range.position.x
+	BOOST_OFFSET = $boost_spawn.position.x
 	facing = Vector2.RIGHT if not $sprite.flip_h else Vector2.LEFT
 	z_index = World.PLAYER_Z
 	if debug:
@@ -76,7 +80,7 @@ func _process(_delta: float) -> void:
 # ----- INPUT ----- #
 func handle_input():
 	if movement_enabled:
-		if Input.is_action_just_pressed("jump") or player_input.a_just_pressed():
+		if player_input.a_just_pressed():
 			jump_buffer =JUMP_BUFFER_TIME
 		
 		if player_input.b_just_pressed():
@@ -89,7 +93,7 @@ func handle_input():
 
 # ------ JUMP FUNCTIONS ----- #
 func check_jump():
-	if jump_buffer > 0 and jumps_used < MAX_JUMPS:
+	if jump_buffer > 0 and jumps_used < MAX_JUMPS and held_item is not Cable:
 		jump()
 		jump_buffer = 0
 
@@ -98,8 +102,15 @@ func jump():
 		velocity.y = -lerp(JUMP_FORCE_GROUND,JUMP_FORCE_GROUND*0.75,move_modifier)
 	else:
 		velocity.y = -lerp(JUMP_FORCE_AIR,JUMP_FORCE_AIR*0.9,move_modifier)
+		spawn_boost()
 	
 	jumps_used += 1
+
+func spawn_boost():
+	var boost = boost_scene.instantiate()
+	boost.global_position = $boost_spawn.global_position
+	boost.parent = self
+	get_tree().current_scene.add_child(boost)
 
 func update_jump_state():
 	var on_floor = is_on_floor()
@@ -149,8 +160,12 @@ func handle_movement(delta):
 		else:
 			accel = ACCEL_GROUND
 	
-	speed = lerp(speed ,speed * 0.7, move_modifier)
-	accel = lerp(accel, accel * 0.6, move_modifier)
+	if held_item is Cable:
+		speed = lerp(speed ,speed * 0.1, move_modifier)
+		accel = lerp(accel, accel * 0.1, move_modifier)
+	else:
+		speed = lerp(speed ,speed * 0.7, move_modifier)
+		accel = lerp(accel, accel * 0.6, move_modifier)
 	velocity.x = \
 		move_toward(velocity.x,horizontal_dir*speed,accel * delta)
 
@@ -158,12 +173,18 @@ func get_movement_modifier() -> float:
 	var modifier = 0.0
 	
 	if held_item:
-		modifier += clamp(held_item.weight/100, 0.0, 1.0)
+		if held_item is Cable:
+			modifier = 0
+		else:
+			modifier += clamp(held_item.weight/100, 0.0, 1.0)
 	
 	return modifier
 
 func update_modifiers():
 	move_modifier = get_movement_modifier()
+
+func velocity_reset():
+	velocity.x = velocity.x * 0.2
 
 # ----- INTERACTION FUNCS ----- #
 func item_interact():
@@ -181,8 +202,11 @@ func item_interact():
 		else:
 			var item = find_nearby_item()
 			if item:
+				if item is Cable:
+					global_position = item.global_position
 				item.pickup(self)
 				held_item = item
+				velocity_reset()
 		interact_button = false
 
 func find_nearby_item() -> Carryable:
@@ -225,11 +249,13 @@ func flip_player():
 	if velocity.x < 0: 
 		$AnimatedSprite2D.flip_h = true
 		$hold_point.position.x = -HOLD_OFFSET
+		$boost_spawn.position.x = -BOOST_OFFSET
 		$range.position.x = -RANGE_OFFSET
 		facing = Vector2.LEFT
 	elif velocity.x > 0:
 		$AnimatedSprite2D.flip_h = false
 		$hold_point.position.x = HOLD_OFFSET
+		$boost_spawn.position.x = BOOST_OFFSET
 		$range.position.x = RANGE_OFFSET
 		facing = Vector2.RIGHT
 
