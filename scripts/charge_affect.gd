@@ -7,7 +7,6 @@ signal charge_at_end
 @onready var plug: Carryable = cable.get_node("plug")
 @onready var timer: Timer = cable.get_node("chargeTimer")
 
-var charging : bool
 var charge_progress : float = 0.0
 var CHARGE_SPACING = 0.2
 var CHARGE_COUNT := 5
@@ -19,8 +18,6 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	if not cable.charging:
 		return
-	
-	var progress := 1.0 - (timer.time_left / timer.wait_time)
 	
 	var cable_length :float = get_cable_length()
 
@@ -35,7 +32,6 @@ func _draw() -> void:
 		var position := get_position_along_line(distance)
 
 		draw_circle(position, 3.0, Color.YELLOW)
-
 
 func get_cable_length() -> float:
 	var length := 0.0

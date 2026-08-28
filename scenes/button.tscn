@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bdcsy7ga68r23"]
 
-[ext_resource type="Script" path="res://button.gd" id="1_5qx48"]
+[ext_resource type="Script" path="res://scripts/button.gd" id="1_5qx48"]
 [ext_resource type="FontFile" uid="uid://d0u8jmefifmwx" path="res://fonts/edit-undo/editundo.ttf" id="2_ski40"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4agcl"]

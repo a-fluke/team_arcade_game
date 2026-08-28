@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dijamkq22s63y"]
 
-[ext_resource type="Script" path="res://scenes/cable.gd" id="1_4ca1u"]
+[ext_resource type="Script" path="res://scripts/cable.gd" id="1_4ca1u"]
 [ext_resource type="PackedScene" uid="uid://vlh82ksixmt4" path="res://scenes/plug.tscn" id="2_4jp8c"]
 [ext_resource type="Script" path="res://scripts/charge_affect.gd" id="2_k7joo"]
 [ext_resource type="Texture2D" uid="uid://cn0dmyvkefw58" path="res://assets/outlet/spool.png" id="3_xgjyu"]

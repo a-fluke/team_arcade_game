@@ -1,7 +1,6 @@
 extends Dock
 class_name BatteryCharger
 
-@export var team_accept : String = "red"
 
 func _ready() -> void:
 	docking_location = $barrel_placer.global_position
