@@ -9,9 +9,6 @@ enum State {
 	PLACED
 }
 
-var COLLISION_LAYER : int = 3
-var COLLISION_MASK  : int = 1
-
 var spawn_position : Vector2
 var state = State.GROUND
 var carrier = null

@@ -174,7 +174,7 @@ func get_movement_modifier() -> float:
 	
 	if held_item:
 		if held_item is Cable:
-			modifier = 0
+			modifier = 1
 		else:
 			modifier += clamp(held_item.weight/100, 0.0, 1.0)
 	
